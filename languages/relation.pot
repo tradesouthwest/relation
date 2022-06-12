@@ -1,0 +1,82 @@
+# Copyright (C) 2022 Tradesouthwest
+# This file is distributed under the GNU General Public License v2 or later.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Relation 1.0.1\n"
+"Report-Msgid-Bugs-To: https://support.tradesouthwest.com\n"
+"POT-Creation-Date: 2022-06-08 13:26-0700\n"
+"PO-Revision-Date: 2022-06-08 12:41-0700\n"
+"Last-Translator: \n"
+"Language-Team: Tradesouthwest\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _;_e;__;_x;esc_html__;esc_html_e;esc_attr__;"
+"esc_attr_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: footer.php:9 header.php:40
+msgid "Y"
+msgstr ""
+
+#: footer.php:10 header.php:41
+msgid "Copyright "
+msgstr ""
+
+#: functions.php:59
+msgid "Main Menu Top"
+msgstr ""
+
+#: functions.php:97
+msgid "Four by Three Ratio Thumb"
+msgstr ""
+
+#: functions.php:165
+#, php-format
+msgid "Continue reading %s"
+msgstr ""
+
+#: functions.php:175
+msgid "Sidebar as Footer"
+msgstr ""
+
+#: functions.php:176
+msgid "Used on every page."
+msgstr ""
+
+#: header.php:11
+msgid "Skip to content"
+msgstr ""
+
+#: nav-content.php:13
+msgid "Older posts"
+msgstr ""
+
+#: nav-content.php:25
+msgid "Newer posts"
+msgstr ""
+
+#: nav-content.php:40
+msgid "Previous Post"
+msgstr ""
+
+#: nav-content.php:42
+msgid "&laquo; Previous: "
+msgstr ""
+
+#: nav-content.php:46
+msgid "Next Post"
+msgstr ""
+
+#: nav-content.php:48
+msgid "Next: "
+msgstr ""
+
+#: page.php:12
+msgid "hover to copy link"
+msgstr ""
