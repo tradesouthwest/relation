@@ -2,10 +2,7 @@
 
 /**
   Theme Name:  Relation
-  Description:  Relation is a blogging theme made for ClassicPress. It uses Dashicons on frontend to save font imports and we use a classic font-stack as well as two font layers built into the theme so you do not have to ping any font CDN.
-                Features include fast loading templates, color scheme in Customizer, add lead text to header and an additional menu where you add your social links into header space. Footer switches between sections acording to width of device viewing.
-                Add custom header image or logo. Anchor link on every page makes it easy to copy page URI for convenient sharing. Fast and dependable them for ClassicPress. Perfect for blogging or authoring news or company updates.
-
+  Description:  Relation is a blogging theme made for ClassicPress. Features include fast loading templates, color scheme in Customizer, add lead text to header and an additional menu where you add your social links into header space. Footer switches between sections acording to width of device viewing. Relation has an option to show comment count or not show. You can pick how to display a featured image: above or as background or even not show at all. Control thumbnail overlays in the Customizer. Relation theme uses Dashicons on frontend to save font imports and we use a classic font-stack as well as two font layers built into the theme so you do not have to ping any font CDN. Has attachment template for full page image display. Add custom header image or logo. Anchor link on every page makes it easy to copy page URI for convenient sharing. Fast and dependable theme for ClassicPress. Perfect for blogging or authoring news or company updates. 
   Author:       Larry Judd
   Author URI:   http://tradesouthwest.com/
   Theme URI:    https://larryjudd.us/relation/theme/
@@ -13,7 +10,7 @@
   Text Domain:  relation
   Tested Up To: 1.4.1
   Requires PHP: 5.6
-  CMS required: wp_body_open action or function call not inserted
+  CMS required: wp_body_open WP action or function call not inserted
   Tags:         two-columns, translation-ready, footer-widgets, full-width-template, featured-images, blog, e-commerce, news, custom-menu, post-formats, custom-background, custom-logo, editor-style, custom-header, threaded-comments
   License:      GPL 3
   License URI:  https://www.gnu.org/licenses/quick-guide-gplv3.en.html
@@ -60,7 +57,7 @@ body {
         Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT",
         Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif; */
     font-weight: normal;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.42857143;
     margin: 0 auto;
     color: #464646;
@@ -144,7 +141,8 @@ p {
 .fa-copy-link:before,
 .fa-tags-list:before,
 .fa-category-folder:before,
-.fa-calendar-day:before {
+.fa-calendar-day:before,
+.fa-comm-count:before {
     font-style: normal;
     font-family: 'Dashicons';
     padding: 0 2px 1px 4px;
@@ -166,6 +164,18 @@ p {
 
 .fa-calendar-day:before {
     content: "\f508";
+}
+.fa-comm-count:before {
+    content: "\f101";
+
+}
+
+.hidden{
+    display: none;
+}
+
+.excerpt-meta{
+    white-space: normal;
 }
 
 /* =Page attributes
@@ -280,6 +290,19 @@ p {
 .inner_content{
     line-height: 1.5758;
 }
+
+.content-woo{
+    width: 98.8992%;
+    margin: 0 auto;
+    box-sizing: border-box
+}
+
+.comment-form label {
+    min-width: 80px;
+    display:   inline-block;
+    border-bottom: thin dotted #ddd;
+    vertical-align: bottom;
+}
 /*
  * Default WP Alignment Classes
  *****************************************************************************/
@@ -377,27 +400,43 @@ img[class*="-thumbnail"] {
 .linked-attachment-container{
     background: inherit;
 }
-.relation-featured_image{
-    width: 100%;
+.relation-featured_image,
+.attachment-relation-featured{
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .relation-featured_image:after{
     content: "";
     clear: both;
     display: block;
 }
-.excerpt-backgrnd{
+.background_image{
     position: relative;
     background-size: contain;
     background-position: left;
     background-repeat: no-repeat;
 }
 .excerpt-ghost{
-    background: rgba(255,255,255, .6);
     height:100%;
     width:100%;
     display:block;
+}
+
+.thumbnail-above{
+    width: 100%;
+    min-height: 50px;
+}
+.breakleft{
+    display: block;
+    float: left;
+}
+.breakleft:after{
+    content: " ";
+    clear: both;
+    display:table;
+    width: 100%;
+    height: .01em;
+    
 }
 tr,
 img {
@@ -867,15 +906,6 @@ ul.list-inline {
     color: black;
 }
 
-
-/*
-.nav-next:before {
-  content: " | ";
-  position: relative;
-  padding: 0 4px;
-}
-*/
-
 .navbar-brand img {
     position: relative;
     top: -.7825em;
@@ -938,6 +968,44 @@ p.post-pagination,
     min-height: 100px;
     padding: 20px;
 }
+
+#comment{
+    width: 66%;
+}
+
+.fieldset-commentform{
+    border: thin dotted #e2e2e2;
+    padding-left:10px;
+    border-radius: 3px;
+}
+.form-allowed-tags{
+    font-size: small;
+    border: thin dotted #e2e2e2;
+    width: 67%;
+    margin-bottom:0;
+}
+
+.tagsatts code{
+    width: 66.175%;
+    display: block;
+    border-radius: 0;
+    background-color: oldlace;
+    margin: 4px 0 8px;
+    font-size: x-small;
+}
+
+.tagsatts code:hover{
+    background-color: transparent;
+}
+
+.comm-title{
+    font-size: smaller;
+}
+
+.submit{
+    padding-left: 10px;
+    padding-right: 10px;
+}
 /* =Media query pages
 ------------------------------------------- */
 @media screen and (min-width: 1242px) {
@@ -988,6 +1056,9 @@ p.post-pagination,
 }
 
 @media screen and (max-width: 991px) {
+    body{ 
+        font-size: 16px;
+    }
     #copyFooter {
         display: none;
     }
@@ -1014,6 +1085,21 @@ p.post-pagination,
 
     .fa-copy-link:before {
         margin-top: 2em;
+    }
+
+}
+@media screen and (max-width: 654px) {
+
+    #Main .post:first-child{
+        margin-top: 6em;
+    }
+    #nav ul li {
+        width: 90%;
+        display: block;
+        border-bottom: thin dotted #e2e2e2;
+    }
+    #nav ul.sub-menu {
+        background: #ffffff;
     }
 
 }
