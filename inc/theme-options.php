@@ -9,6 +9,8 @@
 
 // to1
 add_action( 'init', 'relation_check_disable_emojicons' );
+// tm0
+add_action( 'wp_head', 'relation_customize_css', 2 );  
 
 /**
  * Disable emojis in wp head
@@ -24,10 +26,10 @@ function relation_disable_wp_emojicons()
     remove_filter( 'wp_mail',          'wp_staticize_emoji_for_email' );
     remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
     remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-    remove_action('wp_head', 'print_emoji_detection_script', 7 );
-    remove_action('admin_print_scripts', 'print_emoji_detection_script' );
-    remove_action('wp_print_styles', 'print_emoji_styles' );
-    remove_action('admin_print_styles', 'print_emoji_styles' );
+    remove_action( 'wp_head',             'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles',     'print_emoji_styles' );
+    remove_action( 'admin_print_styles',  'print_emoji_styles' );
 
     add_filter ( 'emoji_svg_url', '__return_false' );
     // filter to remove TinyMCE emojis
@@ -85,4 +87,113 @@ function relation_mods_fire_once() {
         return true;
     }
 
+} 
+
+
+/**
+ * Text to header from customizer
+ * @since 1.0.2
+ * @param string $show checked = hide div
+ * @return Bool
+ */
+
+function relation_comment_counter_maybe(){
+    $rtrn = 'false';
+    $show = get_theme_mod( 'relation_comment_counter' );
+    $rtrn = ( '' != ( $show ) || $show == '1' ) ? 'true' : 'false';
+        
+        return $rtrn;
+}
+
+/**
+ * Text to header from customizer
+ * @since 1.0.1
+ * @return HTML string
+ */
+if ( !function_exists( 'relation_header_lead_render' ) ) : 
+function relation_header_lead_render(){
+    
+    $lead = '';
+        
+    if ( get_theme_mod( 'relation_header_lead' ) ) :
+    
+        $lead = get_theme_mod( 'relation_header_lead' );
+    
+    endif;     
+
+        return sanitize_text_field( $lead );
+}
+endif;
+
+/** tm0
+ * CUSTOM FONT OUTPUT, CSS
+ * The @font-face rule should be added to the stylesheet before any styles. (priority 2)
+ * @uses background-image as linear gradient meerly remove any input background image.
+ * @since 1.0.1
+*/
+
+function relation_customize_css() 
+{   
+    if ( !get_theme_mods() ) return false;    
+        
+        $font = '';
+        $arialstack = 'font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "DejaVu Sans Condensed",
+    Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", Tahoma, Geneva, "Helvetica Neue", 
+    Helvetica, Arial, sans-serif';
+        $uria  = get_stylesheet_directory_uri() . '/deps/kmK_Zq85QVWbN1eW6lJV0A7d.woff2';
+        $urib  = get_stylesheet_directory_uri() . '/deps/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2';
+     
+        $fnt  = get_theme_mod( 'relation_font_choices' );
+        $clr  = get_theme_mod( 'relation_theme_color' );
+        $ghs  = ( empty ( get_theme_mod( 'relation_excerpt_ghost' ) ) ) 
+              ? "rgba(255,255,255, .426)" : get_theme_mod( 'relation_excerpt_ghost' );
+    
+    /* use above set values into inline styles */
+
+    if ( $fnt == 'arial' ) { 
+        $font .= '<style id="relation-arial-styles" type="text/css">';
+        $font .= 
+        "body, button, input, select, textarea{";
+        $font .= $arialstack . '}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit{
+        background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
+
+    } elseif ( $fnt == 'mono' ) {
+        $font .= '<style id="relation-mono-styles" type="text/css">';
+        $font .= 
+        "@font-face {
+        font-family: 'B612 Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: url( $uria );
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }";
+        $font .= 'body, button, input, select, textarea{';
+        $font .= 'font-family: "B612 Mono"}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit{
+        background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
+    } elseif ( $fnt == 'montserrat' ) {
+        $font .= '<style id="relation-montserrat-styles" type="text/css">';
+        $font .= 
+        "@font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        src: url( $urib ) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }";
+        $font .= 'body, button, input, select, textarea{';
+        $font .= 'font-family: "Montserrat";}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit{
+        background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>';
+    } else {
+    
+        $font .= '';
+    }
+        ob_start();
+        print( $font );
+        echo ob_get_clean(); 
 } 

@@ -19,15 +19,16 @@ add_action( 'customize_register', 'relation_register_theme_customizer_setup' );
 
 function relation_register_theme_customizer_setup($wp_customize)
 {
-
+    // Lead text
     $wp_customize->add_section('title_tagline', array(
             'title'             => __( 'Header and Lead Text', 'relation' ),
             'priority'          => 15
-        )); 
+    )); 
+    // Branding
     $wp_customize->add_section('colors', array(
             'title'             => __( 'Colors and Theme Branding', 'relation' ),
             'priority'          => 25
-        )); 
+    )); 
     // Theme font choice section
     $wp_customize->add_section( 'relation_font_types', array(
         'title'       => __( 'Theme and Font Settings', 'relation' ),
@@ -56,13 +57,14 @@ function relation_register_theme_customizer_setup($wp_customize)
     );
     
 
+
+
     $wp_customize->add_setting( 'relation_font_choices', array(
 		'default'           => 'arial',
 		'type'              => 'theme_mod',
 		'sanitize_callback' => 'esc_textarea',
 		'capability'        => 'edit_theme_options',
 	) );
-
     $wp_customize->add_control(
         new WP_Customize_Control(
         $wp_customize,
@@ -81,19 +83,56 @@ function relation_register_theme_customizer_setup($wp_customize)
         )
     ) );
 
+
+    $wp_customize->add_setting( 'relation_thumbnail_display', array(
+		'default'           => 'background_image',
+		'type'              => 'theme_mod',
+		'sanitize_callback' => 'esc_textarea',
+		'capability'        => 'edit_theme_options',
+	) ); 
+    $wp_customize->add_control( 'relation_thumbnail_display', array(
+    
+        'label'       => __( 'Thumbnail Position for Excerpts', 'relation' ),
+        'description' => __( "Choose thumbnail layout. Will only show thumbnail if one exists.", 'relation' ),
+        'section'     => 'relation_font_types',
+        'type'        => 'select',
+        'choices'     => array(
+            'background_image' => __( 'Display as background image', 'relation' ),
+            'above_excerpt'    => __( 'Display above the exceprt', 'relation' ),
+            'no_thumbnail'     => __( 'No thumbnail at all', 'relation' ),
+        ),
+        'priority'    => '15',
+    ) );
+
+
+    $wp_customize->add_setting( 'relation_comment_counter', array(
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'relation_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'relation_comment_counter', array(
+        'type'        => 'checkbox',
+        'section'     => 'relation_font_types', // Add a default or your own section
+        'label'       => __( 'Remove Comment Count', 'relation' ),
+        'description' => __( 'Check box to remove the displaying of comment counts in post excerpt footer meta.', 'relation' ),
+        'priority'    => '20',
+    ) );
+
+
     $wp_customize->add_setting( 'relation_checkbox_emojicon', array(
         'capability'        => 'edit_theme_options',
         'sanitize_callback' => 'relation_sanitize_checkbox',
     ) );
-
     $wp_customize->add_control( 'relation_checkbox_emojicon', array(
         'type'        => 'checkbox',
         'section'     => 'relation_font_types', // Add a default or your own section
         'label'       => __( 'Remove Emojicons', 'relation' ),
         'description' => __( 'Check box to remove emojicons from theme head. This saves bandwidth when page loads.', 'relation' ),
+        'priority'    => '30',
     ) );
 
     
+
+
     $wp_customize->add_setting(
           'relation_theme_color', array(
           'default'           => '#50c77a',
@@ -102,112 +141,56 @@ function relation_register_theme_customizer_setup($wp_customize)
           'capability'        => 'edit_theme_options'
         )
     );
-
     $wp_customize->add_control( new WP_Customize_Color_Control(
         $wp_customize,
         'relation_theme_color',
-        array('label' => __( 'Color scheme for buttons and icons', 'relation' ),
-            'section' => 'colors',
+        array('label'  => __( 'Color scheme for buttons and icons', 'relation' ),
+            'section'  => 'colors',
             'settings' => 'relation_theme_color'
         ) ) 
     );
 
+    $wp_customize->add_setting(
+          'relation_excerpt_ghost', array(
+          'default'           => 'rgba(255,255,255, .426)',
+          'sanitize_callback' => 'relation_sanitize_rgba',
+          'type'              => 'theme_mod',
+          'capability'        => 'edit_theme_options'
+        )
+    );
+    $wp_customize->add_control( 'relation_excerpt_ghost', array(
+        'type'        => 'text',
+        'section'     => 'colors',
+        'label'       => __( 'Overlay Mask for Excerpt', 'relation' ),
+        'description' => '<p>' . __('Select color and opacity of background overlay for 
+                         excerpts with thumbnails.', 'relation' ) . '</p>' 
+                         . '<p><em>' . __('Learn RGBA at www.w3.org/wiki/CSS/Properties/color/RGBA', 'relation') 
+                         .'</em></p>' 
+                         . '<strong>' . __( 'Example CSS "rgba(255, 255, 255, .4)"', 'relation' ) . '</strong>'
+    ) );
+
 }
 
+// Easy Boolean checker
 function relation_sanitize_checkbox( $checked ) {
-  // Boolean check.
-  return ( ( isset( $checked ) && true == $checked ) ? true : false );
-}
-
+  
+    return ( ( isset( $checked ) && true == $checked ) ? true : false );
+} 
 
 /**
- * Text to header from customizer
- * @since 1.0.1
- * @return HTML string
+ * Check if string starts with 'rgba', else use hex sanity
+ * sanitize the hex color and convert hex to rgba
+ * @since 1.0.2
  */
-if ( !function_exists( 'relation_header_lead_render' ) ) :  
-function relation_header_lead_render(){
+function relation_sanitize_rgba( $color ) {
     
-    $lead = '';
-        
-    if ( get_theme_mod( 'relation_header_lead' ) ) :
-    
-        $lead = get_theme_mod( 'relation_header_lead' );
-    
-    endif;     
+    if ( empty( $color ) || is_array( $color ) )
+        return 'rgba(0,0,0,0)';
 
-        return sanitize_text_field( $lead );
-}
-endif;
-
-// tm0
-add_action( 'wp_head', 'relation_customize_css', 2 );  
-
-/** tm0
- * CUSTOM FONT OUTPUT, CSS
- * The @font-face rule should be added to the stylesheet before any styles. (priority 2)
- * @uses background-image as linear gradient meerly remove any input background image.
- * @since 1.0.1
-*/
-
-function relation_customize_css() 
-{   
-    if ( !get_theme_mods() ) return false;    
-        
-        $font = '';
-        $arialstack = 'font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "DejaVu Sans Condensed",
-    Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", Tahoma, Geneva, "Helvetica Neue", 
-    Helvetica, Arial, sans-serif';
-        $uria  = get_stylesheet_directory_uri() . '/deps/kmK_Zq85QVWbN1eW6lJV0A7d.woff2';
-        $urib  = get_stylesheet_directory_uri() . '/deps/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2';
-     
-        $fnt  = get_theme_mod( 'relation_font_choices' );
-        $clr  = get_theme_mod( 'relation_theme_color' );
-
-    if ( $fnt == 'arial' ) { 
-        $font .= '<style id="relation-arial-styles" type="text/css">';
-        $font .= 
-        "body, button, input, select, textarea{";
-        $font .= $arialstack . '}.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
-        color: ' . $clr . '}
-        .nav-previous, .nav-next, .postlink .btn-paging, .search-submit{
-        background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
-
-    } elseif ( $fnt == 'mono' ) {
-        $font .= '<style id="relation-mono-styles" type="text/css">';
-        $font .= 
-        "@font-face {
-        font-family: 'B612 Mono';
-        font-style: normal;
-        font-weight: 400;
-        src: url( $uria );
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }";
-        $font .= 'body, button, input, select, textarea{';
-        $font .= 'font-family: "B612 Mono"}.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
-        color: ' . $clr . '}
-        .nav-previous, .nav-next, .postlink .btn-paging, .search-submit{
-        background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
-    } elseif ( $fnt == 'montserrat' ) {
-        $font .= '<style id="relation-montserrat-styles" type="text/css">';
-        $font .= 
-        "@font-face {
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 400;
-        src: url( $urib ) format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }";
-        $font .= 'body, button, input, select, textarea{';
-        $font .= 'font-family: "Montserrat";}.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
-        color: ' . $clr . '}
-        .nav-previous, .nav-next, .postlink .btn-paging, .search-submit{
-        background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>';
-    } else {
-    
-        $font .= '';
+    if ( false === strpos( $color, 'rgba' ) ) {
+        return sanitize_hex_color( $color );
     }
-        ob_start();
-        print( $font );
-        echo ob_get_clean(); 
-} 
+    $color = str_replace( ' ', '', $color );
+    sscanf( $color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
+    return 'rgba('.$red.','.$green.','.$blue.','.$alpha.')';
+}
