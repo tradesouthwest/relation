@@ -25,7 +25,7 @@
                     <?php previous_posts_link(
                           __('Newer posts', "relation") . " &raquo;"); ?></li>
                 <?php } ?>
-            
+
             </ul>
         </nav>
     </div>

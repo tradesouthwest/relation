@@ -1,6 +1,11 @@
 <?php 
- /* ends container-main & page-wrap @package Relation */ 
+ /** 
+  * Ends container-main & page-wrap from header file
+  * @package Relation 
+  * @since 1.0.1
+  */ 
 ?>
+    
     </section>
         <footer id="copyFooterFooter">
             
@@ -16,6 +21,5 @@
 </div>
 
     <?php wp_footer(); ?>
-    
 </body>
 </html> 

@@ -33,7 +33,7 @@
                     if( function_exists('relation_loop_featured_image') ) : 
                         do_action( 'relation_featured_image' ); 
                     else: 
-                        the_post_thumbnail(); 
+                        the_post_thumbnail('relation-featured'); 
                     endif; 
                     ?>
                     </figure>
@@ -52,8 +52,6 @@
                                 <?php wp_link_pages(); ?>
                         
                             </div>
-
-                    
                 </div>
                 
             </article>

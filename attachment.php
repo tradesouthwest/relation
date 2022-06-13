@@ -23,19 +23,19 @@ get_header(); ?>
 
                     <p class="attachment">
                        <a href="<?php echo esc_attr( wp_get_attachment_url( $post->id ) ); ?>"
-                       title="<?php the_title_attribute(); ?>"
-                       rel="attachment"><img src="<?php echo esc_attr($att_image[0]);?>"
-                       width="<?php echo esc_attr($att_image[1]);?>"
-                       height="<?php echo esc_attr($att_image[2]);?>"
-                       class="img-responsive"
-                       alt="<?php the_title_attribute(); ?>" /></a>
+                        title ="<?php the_title_attribute(); ?>"
+                        rel   ="attachment"><img src="<?php echo esc_attr($att_image[0]);?>"
+                        width ="<?php echo esc_attr($att_image[1]);?>"
+                        height="<?php echo esc_attr($att_image[2]);?>"
+                        class ="img-responsive"
+                        alt   ="<?php the_title_attribute(); ?>" /></a>
                     </p>
 
                         <?php else : ?>
 
-                        <a href="<?php echo esc_url(wp_get_attachment_url($post->ID)) ?>"
+                        <a href ="<?php echo esc_url(wp_get_attachment_url($post->ID)) ?>"
                            title="<?php echo esc_attr(get_the_title($post->ID), 1 ) ?>"
-                           rel="attachment"><?php printf( esc_url( basename($post->guid) ) ); ?></a>
+                           rel  ="attachment"><?php printf( esc_url( basename($post->guid) ) ); ?></a>
 
                     <?php endif; ?>
 
