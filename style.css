@@ -216,6 +216,10 @@ p {
 
 }
 
+.header-logo img {
+    max-height: inherit;
+    max-width: 90%;
+}
 .descriptor-alt {
     color: #696969;
     font-style: italic
@@ -962,6 +966,10 @@ p.post-pagination,
     text-align: center;
     height: 4em;
     margin: 15px auto;
+}
+
+.meta-default{
+    margin-top: 1em;
 }
 
 .footer-addon .widget{
