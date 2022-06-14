@@ -117,6 +117,17 @@ function relation_register_theme_customizer_setup($wp_customize)
         'priority'    => '20',
     ) );
 
+    $wp_customize->add_setting( 'relation_comment_notonpage', array(
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'relation_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'relation_comment_notonpage', array(
+        'type'        => 'checkbox',
+        'section'     => 'relation_font_types', // Add a default or your own section
+        'label'       => __( 'Remove Comments From PAGES', 'relation' ),
+        'description' => __( 'Check box to remove the displaying of comments in pages (not posts).', 'relation' ),
+        'priority'    => '25',
+    ) );
 
     $wp_customize->add_setting( 'relation_checkbox_emojicon', array(
         'capability'        => 'edit_theme_options',
