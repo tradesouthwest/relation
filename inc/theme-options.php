@@ -10,7 +10,7 @@
 // to1
 add_action( 'init', 'relation_check_disable_emojicons' );
 // tm0
-add_action( 'wp_head', 'relation_customize_css', 2 );  
+add_action( 'wp_head', 'relation_theme_customizer_css', 2 );  
 
 /**
  * Disable emojis in wp head
@@ -89,9 +89,23 @@ function relation_mods_fire_once() {
 
 } 
 
+/**
+ * relation_comment_notonpage from customizer
+ * @since 1.0.2
+ * @param string $show checked = hide div
+ * @return Bool
+ */
+
+function relation_comment_notonpage_maybe(){
+    $rtrn = 'false';
+    $show = get_theme_mod( 'relation_comment_notonpage' );
+    $rtrn = ( '' != ( $show ) || $show == '1' ) ? 'true' : 'false';
+        
+        return $rtrn;
+}
 
 /**
- * Text to header from customizer
+ * Check to display comment counts from customizer
  * @since 1.0.2
  * @param string $show checked = hide div
  * @return Bool
@@ -132,26 +146,26 @@ endif;
  * @since 1.0.1
 */
 
-function relation_customize_css() 
+function relation_theme_customizer_css() 
 {   
-    if ( !get_theme_mods() ) return false;    
-        
+    
         $font = '';
-        $arialstack = 'font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "DejaVu Sans Condensed",
-    Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", Tahoma, Geneva, "Helvetica Neue", 
-    Helvetica, Arial, sans-serif';
         $uria  = get_stylesheet_directory_uri() . '/deps/kmK_Zq85QVWbN1eW6lJV0A7d.woff2';
         $urib  = get_stylesheet_directory_uri() . '/deps/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2';
-     
-        $fnt  = get_theme_mod( 'relation_font_choices' );
-        $clr  = get_theme_mod( 'relation_theme_color' );
+        $arialstack = 'font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "DejaVu Sans Condensed",
+        Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", Tahoma, Geneva, "Helvetica Neue", 
+        Helvetica, Arial, sans-serif';
+        $fnt  = (empty( get_theme_mod( 'relation_font_choices' ) ) ) ? 'arial' 
+                    : get_theme_mod( 'relation_font_choices' );
+        $clr  = ( empty( get_theme_mod( 'relation_theme_color' ) ) ) ? '#50c77a' 
+                    : get_theme_mod( 'relation_theme_color' );
         $ghs  = ( empty ( get_theme_mod( 'relation_excerpt_ghost' ) ) ) 
               ? "rgba(255,255,255, .426)" : get_theme_mod( 'relation_excerpt_ghost' );
     
     /* use above set values into inline styles */
 
     if ( $fnt == 'arial' ) { 
-        $font .= '<style id="relation-arial-styles" type="text/css">';
+        $font .= '<style id="relation-arial-style" type="text/css">';
         $font .= 
         "body, button, input, select, textarea{";
         $font .= $arialstack . '}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
@@ -160,7 +174,7 @@ function relation_customize_css()
         background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
 
     } elseif ( $fnt == 'mono' ) {
-        $font .= '<style id="relation-mono-styles" type="text/css">';
+        $font .= '<style id="relation-mono-style" type="text/css">';
         $font .= 
         "@font-face {
         font-family: 'B612 Mono';
@@ -175,7 +189,7 @@ function relation_customize_css()
         .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit{
         background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
     } elseif ( $fnt == 'montserrat' ) {
-        $font .= '<style id="relation-montserrat-styles" type="text/css">';
+        $font .= '<style id="relation-montserrat-style" type="text/css">';
         $font .= 
         "@font-face {
         font-family: 'Montserrat';
@@ -191,8 +205,15 @@ function relation_customize_css()
         background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>';
     } else {
     
-        $font .= '';
-    }
+        $font .= '<style id="relation-arial-style" type="text/css">';
+        $font .= 
+        "body, button, input, select, textarea{";
+        $font .= $arialstack . '}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit, #lower-navigation a, .search-submit{
+        background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
+    } 
+
         ob_start();
         print( $font );
         echo ob_get_clean(); 

@@ -66,6 +66,10 @@
                 <div class="meta-default">
 
                     <?php get_search_form(); ?>
+                    <?php /* Add `screen-reader-text` class to the search submit button. il8n */ 
+                    ?>
+                    <input type="submit" class="search-submit screen-reader-text" 
+                    value="<?php esc_attr_e( 'Search', 'relation' ); ?>">
                             
                     <ul><?php wp_loginout(); ?></ul>
                 </div>

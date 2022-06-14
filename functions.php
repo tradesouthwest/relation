@@ -12,30 +12,32 @@
  */
 
 // FAST LOADER References ( find @id in DocBlocks )
+// ------------------------- Actions ---------------------------
 // #f1
-add_action( 'after_setup_theme',  'relation_theme_setup' );
+add_action( 'after_setup_theme',          'relation_theme_setup' );
 // #f2
-add_action( 'wp_print_scripts',   'relation_theme_queue_js' );
-// #f3 Priority 0 to make it available to lower priority callbacks.
-add_action( 'after_setup_theme',  'relation_content_width', 0 );
+add_action( 'wp_print_scripts',           'relation_theme_queue_js' );
+// #f3 
+/* Priority 0 to make it available to lower priority callbacks. */
+add_action( 'after_setup_theme',          'relation_content_width', 0 );
 // #f4
-add_filter( 'excerpt_more',       'relation_custom_excerpt_more' );
-// #f4
-add_action( 'wp_enqueue_scripts', 'relation_theme_scripts' );
+add_action( 'wp_enqueue_scripts',         'relation_theme_scripts' );
 // #f5
-add_action( 'widgets_init',       'relation_register_sidebars' );
+add_action( 'widgets_init',               'relation_register_sidebars' );
 // #f6
-add_action( 'wp_head',            'relation_pingback_header' );
+add_action( 'wp_head',                    'relation_pingback_header' );
 // #f7
 add_action( 'relation_render_attachment', 'relation_render_attachment_link' ); 
-// #f8 
-add_filter( 'image_size_names_choose', 'relation_custom_featured_sizes' );
 // #f9
-add_action( 'relation_render_thumbnail', 'relation_render_thumbnail_mod' );
+add_action( 'relation_render_thumbnail',  'relation_render_thumbnail_mod' );
 // #f10 
-add_action( 'relation_exerpt_render', 'relation_exerpt_render_thumbnail' );
+add_action( 'relation_exerpt_render',     'relation_exerpt_render_thumbnail' );
 // #f11
-add_action( 'relation_footer_meta', 'relation_footer_meta_render' );
+add_action( 'relation_footer_meta',       'relation_footer_meta_render' );
+// ------------------------- Filters -----------------------------
+// #f4
+add_filter( 'excerpt_more',    'relation_custom_excerpt_more' );
+
 
 /**
  * Setup function is hooked into the after_setup_theme hook, which runs before the init hook. 
@@ -73,8 +75,8 @@ function relation_theme_setup() {
     add_theme_support( 'automatic-feed-links' ); // rss feederz
     add_theme_support( 'post-thumbnails', array( 'post', 'page') );
     
-    // register new featured image size. width, height, and crop
-    add_image_size( 'relation-featured', 520, 300, false);  // 4:3 ratio 
+    // register new phone-landscape featured image size. @width, @height, and @crop
+    add_image_size( 'relation-featured', 520, 300, false);   
 
     //page background image and color support
     $defaults = array(
@@ -86,7 +88,9 @@ function relation_theme_setup() {
     );
     add_theme_support( 'custom-background', $defaults );
     add_theme_support( 'custom-logo' );
-    // TODO add_editor_style('editor-style.css');    
+
+    // woocommerce filters in lower part of this file
+    add_theme_support( 'woocommerce' );
 
     // main nav in header - also nav menu in side-header
     register_nav_menus(
@@ -96,26 +100,16 @@ function relation_theme_setup() {
         )
     );
 
+    // TODO add_editor_style('editor-style.css');    
     load_theme_textdomain( 'relation', get_template_directory_uri() . '/languages' );
-
-    // woocommerce filters in lower part of this file
-    add_theme_support( 'woocommerce' );
-}
-
-// @id f8 Make custom sizes selectable from WordPress admin.
-function relation_custom_featured_sizes( $size_names ) {
-
-    return array_merge( $size_names, array(
-        'relation-featured' => __( 'This is a 5:4 image size', 'relation' ),
-    ) );
 }
 
 /**
  * Only enable js if the visitor is browsing either a page or a post    
  * or if comments are open for the entry, or threaded comments are enabled
  *
- * @uses `wp_enqueue_script`
  * @id f2
+ * @since 1.0.0 
  */
 
 function relation_theme_queue_js(){
@@ -130,6 +124,7 @@ function relation_theme_queue_js(){
  * @global int $content_width
  *
  * @id f3
+ * @since 1.0.0
  */
 
 function relation_content_width() {
@@ -141,12 +136,14 @@ function relation_content_width() {
  * Enqueue scripts and styles.
  *
  * @id f4
+ * @since 1.0.0 
  */
 
 function relation_theme_scripts() {
 
-    // For use of child themes
+    // Load the main stylesheet.
     wp_enqueue_style( 'relation-style', get_stylesheet_uri() );
+    // Add Dashicons, used in the main stylesheet.
     wp_enqueue_style( 'dashicons' );
 }
 
@@ -184,15 +181,13 @@ function relation_render_attachment_link(){
 
 function relation_exerpt_render_thumbnail(){
 
-    $class = '';
-
+    $class     = '';
     if ( !get_theme_mods() ) : 
         $class = "excerpt-background";
     else: 
-    
-    $choices = ( empty( get_theme_mod( 'relation_thumbnail_display' ) ) )
-             ? 'background_image' : get_theme_mod( 'relation_thumbnail_display' );
-    
+    $choices   = ( empty( get_theme_mod( 'relation_thumbnail_display' ) ) )
+               ? 'background_image' : get_theme_mod( 'relation_thumbnail_display' );
+
     switch ( $choices ) {
         case "background_image":
             $class = "excerpt-backgrnd";
@@ -206,8 +201,7 @@ function relation_exerpt_render_thumbnail(){
         default                :
          $class="excerpt-backgrnd";
     }
-    endif;
-        
+    endif; 
             return $class;
 }
 
@@ -238,6 +232,7 @@ function relation_footer_meta_render(){
 /**
  * Relation_social_menu only used as fallback
  *
+ * @since 1.0.1 
  * @return null
  */
 function relation_social_menu_render(){
@@ -260,9 +255,9 @@ function relation_theme_custom_logo() {
         if ( has_custom_logo() ) {
             $output = '<div class="header-logo"><img src="'. esc_url( $logo[0] ) .'" 
             alt="'. get_bloginfo( 'name' ) .'"></div>'; 
-            } 
-            else 
-                { $output = ''; }
+        } else { 
+            $output = ''; 
+        }
     }
 
         // Output sanitized in header to assure all html displays.
@@ -321,6 +316,7 @@ function relation_register_sidebars() {
  * Header for singular articles
  * Add pingback url auto-discovery header for singular articles.
  *
+ * @since 1.0.0
  * @return wp_head
  * @id f6
  */
@@ -367,12 +363,20 @@ endif;
  * @example for path if using a child theme
  * "require_once ( get_stylesheet_directory() . '/theme-options.php' );"
  *
- * @uses You would use the above method for any file you move to child theme directory to override.
+ * @uses You would use the above method for any file you move to child theme directory.
  */
 
-//Register Customizer assets
+/**
+ * Customizer additions.
+ *
+ * @since 1.0.0 
+ */ 
 require_once get_template_directory() . '/inc/customizer.php';
 
-//Register Theme option assets
+/**
+ * Customizer extensions and addtional functionality.
+ *
+ * @since 1.0.1
+ */
 require_once get_template_directory() . '/inc/theme-options.php';
 ?>
