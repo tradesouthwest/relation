@@ -14,9 +14,21 @@ get_header(); ?>
             ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope 
                 itemtype="https://schema.org/Article">
-            
-                <h1><?php the_title(); ?></h1>
 
+                <header class="single-page-header">
+                    <div class="perma-hover">
+                    <span class="perma-hover-link">
+                    <?php printf( '<i class="fa-copy-link" title="%s"></i><em>%s</em>',
+                                      __( 'hover aside to copy link', 'relation'),
+                                    esc_html( esc_url( get_permalink() ) )
+                    ); ?>
+                    </span>
+                    </div>
+                    <?php
+                    the_title( '<h2>', '</h2>' );
+                    ?>
+                </header>
+                
                 <div class="entry-attachment">
                     <?php if ( wp_attachment_is_image( $post->id ) ) :
                         $att_image = wp_get_attachment_image_src( $post->id, "full"); ?>
