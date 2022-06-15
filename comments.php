@@ -57,12 +57,11 @@ if ( post_password_required() )
             <span class="tagsatts"><code>' . allowed_tags() . '</code></span>',
 
         // Redefine default textarea (the comment body).
-        'comment_field' => '<p class="comment-form-comment"><label for="comment">'
-            . esc_attr__( 'Respond', 'relation' )
-            . '<span class="screen-reader-text">'
-            . esc_html__( 'Comment textarea box', 'relation' ) . '</label>
-            <br /><textarea id="comment" name="comment" aria-required="true">
-            </textarea></p>',
+        'comment_field' => '<span class="comment-form-comment"><label for="comment">'
+            . esc_attr__( 'Respond', 'relation' ) . '<span class="screen-reader-text">'
+            . esc_html__( 'Comment textarea box', 'relation' ) . '</label><br>
+            <textarea id="comment" name="comment" aria-required="true">
+            </textarea></span>',
 
         //logged in check
         'must_log_in' => '<p class="must-log-in">'
@@ -77,5 +76,5 @@ if ( post_password_required() )
     );
     ?>
             <div class="fieldset-commentform">
-                <?php  comment_form( $comment_args ); ?>
+                <?php comment_form( $comment_args ); ?>
             </div> 
