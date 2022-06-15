@@ -252,17 +252,68 @@ p {
 }
 
 #Main {
-    padding-left: 2em;
-    margin-top: 2em;
-    padding-top: 2em;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 38px;
 }
 
-#Main .post:first-child {
-    margin-top: 4.67em;
+.blog .main article.post:first-child{
+    padding-top: 50px;
 }
 
 .blog #Main {
     padding-top: 15px;
+}
+
+.single-article-header,
+.single-page-header{
+    width: 100%;
+    height: 5em;
+padding-top: 20px;
+padding-bottom: 20px;
+}
+
+.perma-hover-link {
+   
+    display: inline-block;
+    color: inherit;
+}
+
+.perma-hover-link i {
+    color: #038;
+    cursor: pointer;
+}
+
+.perma-hover-link em{
+    color: transparent;
+    position: relative;
+    left: 1.45em;
+    top: -1.25em;
+}
+.perma-hover-link em:hover{
+    cursor: text;
+    color: inherit
+}
+
+.perma-hover {
+    width: 100%;
+    height: 3em;
+    position: relative;
+    left: 0;
+    cursor: pointer;
+}
+
+.single-article-header h2{
+    color: inherit;
+    margin: 10px 0 0 0;
+}
+
+.page .post-title.h4 {
+    margin-top: 20px;
+}
+
+.inner_content{
+    line-height: 1.5758;
 }
 
 .dark .navbar-fixed {
@@ -287,14 +338,6 @@ p {
     border-bottom: 1px solid #ddd;
 }
 
-.page .post-title.h4 {
-    margin-top: 0;
-}
-
-.inner_content{
-    line-height: 1.5758;
-}
-
 .content-woo{
     width: 98.8992%;
     margin: 0 auto;
@@ -307,6 +350,13 @@ p {
     border-bottom: thin dotted #ddd;
     vertical-align: bottom;
 }
+
+#lower-navigation{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+}
+
 /*
  * Default WP Alignment Classes
  *****************************************************************************/
@@ -447,6 +497,11 @@ img {
     page-break-inside: avoid;
 }
 
+button[type="submit"],
+input[type="submit"] {
+    cursor: pointer;
+}
+
 .search-field,
 input{
     padding: 5px 2px 6px 1px;
@@ -560,26 +615,6 @@ pre code {
     border-radius: 0;
 }
 
-.perma-hover-link {
-    width: inherit;
-    display: block;
-    position: relative;
-    color: transparent;
-    left: 1.45em;
-    top: -1em;
-}
-
-.perma-hover-link:hover {
-    color: #038;
-    cursor: text;
-}
-
-.perma-hover {
-    width: 100%;
-    cursor: pointer;
-
-}
-
 .excrpt-more {
     margin-left: 8px;
 }
@@ -644,8 +679,8 @@ ul.list-inline {
     border-bottom: 1px solid #ddd;
     z-index: 999;
     width: calc( calc( .6 * 100% ) - 20px );
-    min-height: 1px;
-    background: #ffffff;
+    min-height: 38px;
+    background: rgba(255,255,255, .92);
     margin-top: 0;
     padding: 10px 2px;
     right: 0;

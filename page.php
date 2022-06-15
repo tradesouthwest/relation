@@ -9,53 +9,50 @@
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> 
                      itemscope itemtype="https://schema.org/Article">
 
-                <div class="perma-hover">
-                    <?php printf( '<i class="fa-copy-link" title="%s"></i>',
-                                  __( 'hover aside to copy link', 'relation') ); ?> 
+                <header class="single-page-header">
+                    <div class="perma-hover">
                     <span class="perma-hover-link">
-                      <?php echo esc_attr( esc_url( get_permalink() ) ); ?>
+                    <?php printf( '<i class="fa-copy-link" title="%s"></i><em>%s</em>',
+                                      __( 'hover aside to copy link', 'relation'),
+                                    esc_html( esc_url( get_permalink() ) )
+                    ); ?>
                     </span>
-                </div>
-
-                <header>
-                <?php
-                the_title(
-                sprintf( '<h2 class="post-title h4" title="%s" id="bookmark">', 
-                esc_attr( esc_url( get_permalink() ) ) ),
-                '</h2>'
-                );
-                ?>
+                    </div>
+                    <?php
+                    the_title( '<h2>', '</h2>' );
+                    ?>
                 </header>
 
-                <div class="post-content page-post">
+                <section class="post-content page-post">
                     <figure class="relation-featured_image">
-                    <?php 
-                    if( function_exists('relation_loop_featured_image') ) : 
-                        do_action( 'relation_featured_image' ); 
-                    else: 
-                        the_post_thumbnail('relation-featured'); 
-                    endif; 
-                    ?>
+                        
+                        <?php 
+                        // check if the post has a Post Thumbnail assigned to it.
+                        if ( has_post_thumbnail() ) { 
+                            do_action( 'relation_render_attachment' );
+                        } else {
+                            echo '<div class="no-thumb"></div>'; }
+                        ?>
                     </figure>
                     <div class="inner_content">
 
                         <?php the_content( '', true ); ?>
 
                     </div>
-                        <div class="comments-section">
-
-                            <?php comments_template(); ?>  
-
-                        </div>
-                            <div class="pagination">
+                    <div class="pagination">
                         
-                                <?php wp_link_pages(); ?>
+                        <?php wp_link_pages(); ?>
                         
-                            </div>
-                </div>
-                
+                    </div>            
+                </section>
             </article>
-        
+
+                <aside class="comments-section">
+
+                    <?php comments_template(); ?>  
+
+                </aside> 
+
         <?php endwhile; ?>
 
 		    <?php else : ?>

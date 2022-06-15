@@ -11,18 +11,23 @@ get_header(); ?>
         <?php if ( have_posts() ) : ?>
 
 	    <?php while ( have_posts() ) : the_post(); ?>
+        
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope 
             itemtype="https://schema.org/Article">
-            <header>
-            <?php
-            the_title(
-            sprintf( '<h2 class="post-title h4" title="%s" id="bookmark">', 
-            esc_attr( esc_url( get_permalink() ) ) ),
-            '</h2>'
-            );
-            ?>
+
+            <header class="single-article-header">
+                <div class="perma-hover">
+                    <span class="perma-hover-link">
+                    <?php printf( '<i class="fa-copy-link" title="%s"></i><em>%s</em>',
+                                      __( 'hover aside to copy link', 'relation'),
+                                    esc_html( esc_url( get_permalink() ) )
+                    ); ?>
+                    </span>
+                </div>
+                <?php the_title( '<h2>', '</h2>' ); ?>
             </header>
-            <div class="post-content">
+
+            <section class="post-content">
 
                 <?php 
                 // check if the post has a Post Thumbnail assigned to it.
@@ -31,25 +36,31 @@ get_header(); ?>
                 } else {
                     echo '<div class="no-thumb"></div>'; }
                 ?>
-        
-            <div class="inner_content">
 
-                <?php the_content( '', true ); ?>
-                
-            </div>
-                <div class="post-footer">
-                    <p><i class="fa-calendar-day"></i><span class="post_footer-date">
-                    <?php printf( esc_attr( get_the_date() ) ); ?></span>
-                    <i class="fa-category-folder"></i><span><?php the_category( ' &bull; ' ); ?></span>
-                    <i class="fa-tags-list"></i><span><?php the_tags('<em class="tags">', ' ', '</em>'); ?></span></p>
+                <div class="inner_content">
+
+                    <?php the_content( '', true ); ?>
+                    
                 </div>
-            
+                    <div class="post-footer">
+                        <p><i class="fa-calendar-day"></i><span class="post_footer-date">
+                        <?php printf( esc_attr( get_the_date() ) ); ?></span>
+                        <i class="fa-category-folder"></i><span><?php the_category( ' &bull; ' ); ?></span>
+                        <i class="fa-tags-list"></i><span><?php the_tags('<em class="tags">', ' ', '</em>'); ?></span></p>
+                    </div>
+                <div class="pagination">
+                            
+                    <?php wp_link_pages(); ?>
+                            
+                </div>
+            </section>
+        </article>
+
             <aside>
 
                 <?php comments_template(); ?>
                 
             </aside>
-        </article>
         
         <?php endwhile; ?>
 

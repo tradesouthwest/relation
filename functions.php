@@ -142,7 +142,7 @@ function relation_content_width() {
 function relation_theme_scripts() {
 
     // Load the main stylesheet.
-    wp_enqueue_style( 'relation-style', get_stylesheet_uri() );
+    wp_enqueue_style( 'relation-style', get_stylesheet_uri(), [], time(), false );
     // Add Dashicons, used in the main stylesheet.
     wp_enqueue_style( 'dashicons' );
 }

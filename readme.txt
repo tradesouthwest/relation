@@ -25,6 +25,10 @@ Relation is distributed under the terms of the GNU GPL
 * To set up social media links in the page footer: Appearance > Menus - then <Custom Links> to the left. Footer does not support depths of the child links below it. (No drop downs)
 
 == Change Log ==
+1.0.3
+- added comment form ui for pages
+- added attachment linked on pages
+
 1.0.2
 - added color selector to customizer
 
