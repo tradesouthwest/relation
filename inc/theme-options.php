@@ -90,36 +90,6 @@ function relation_mods_fire_once() {
 } 
 
 /**
- * relation_comment_notonpage from customizer
- * @since 1.0.2
- * @param string $show checked = hide div
- * @return Bool
- */
-
-function relation_comment_notonpage_maybe(){
-    $rtrn = 'false';
-    $show = get_theme_mod( 'relation_comment_notonpage' );
-    $rtrn = ( '' != ( $show ) || $show == '1' ) ? 'true' : 'false';
-        
-        return $rtrn;
-}
-
-/**
- * Check to display comment counts from customizer
- * @since 1.0.2
- * @param string $show checked = hide div
- * @return Bool
- */
-
-function relation_comment_counter_maybe(){
-    $rtrn = 'false';
-    $show = get_theme_mod( 'relation_comment_counter' );
-    $rtrn = ( '' != ( $show ) || $show == '1' ) ? 'true' : 'false';
-        
-        return $rtrn;
-}
-
-/**
  * Text to header from customizer
  * @since 1.0.1
  * @return HTML string

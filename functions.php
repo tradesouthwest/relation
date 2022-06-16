@@ -205,6 +205,38 @@ function relation_exerpt_render_thumbnail(){
             return $class;
 }
 
+
+/**
+ * relation_comment_notonpage from customizer
+ * @since 1.0.2
+ * @param string $show checked = hide div
+ * @return Bool
+ */
+
+function relation_comment_notonpage_maybe(){
+
+    $rtrn = 'false';
+    $show = get_theme_mod( 'relation_comment_notonpage' );
+    $rtrn = ( ( '' != $show ) || $show == '1' ) ? 'true' : 'false';
+        
+        return $rtrn;
+}
+
+/**
+ * Check to display comment counts from customizer
+ * @since 1.0.2
+ * @param string $show checked = hide div
+ * @return Bool
+ */
+
+function relation_comment_counter_maybe(){
+    $rtrn = 'false';
+    $show = get_theme_mod( 'relation_comment_counter' );
+    $rtrn = ( '' != ( $show ) || $show == '1' ) ? 'true' : 'false';
+        
+        return $rtrn;
+}
+
 /**
  * Render footer meta with option to hide comment counts
  * 
@@ -229,6 +261,7 @@ function relation_footer_meta_render(){
     ?>
     </p><?php
 }
+
 /**
  * Relation_social_menu only used as fallback
  *

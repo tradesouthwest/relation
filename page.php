@@ -47,11 +47,18 @@
                 </section>
             </article>
 
+                <?php // if mod checked returns 1 
+                    if ( relation_comment_notonpage_maybe() == 'false' ) { 
+                ?>
+
                 <aside class="comments-section">
 
                     <?php comments_template(); ?>  
 
                 </aside> 
+
+                    <?php 
+                    } ?>
 
         <?php endwhile; ?>
 
