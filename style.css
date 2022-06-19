@@ -460,6 +460,8 @@ img[class*="-thumbnail"] {
 .linked-attachment-container{
     background: inherit;
 }
+
+.relation-featured.wp-post-image,
 .relation-featured_image,
 .attachment-relation-featured{
     text-align: center;
@@ -470,6 +472,12 @@ img[class*="-thumbnail"] {
     clear: both;
     display: block;
 }
+.relation-featured.wp-post-image{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 .background_image{
     position: relative;
     background-size: contain;
