@@ -76,13 +76,34 @@ function relation_register_theme_customizer_setup($wp_customize)
             'type'        => 'select',
             'choices'     => array(
                 'mono'       => __( 'B612 Mono', 'relation' ),
-                'montserrat'       => __( 'Montserrat', 'relation' ),
-                'arial' => __( 'Helvetica, Arial font-stack', 'relation' ),
+                'montserrat' => __( 'Montserrat', 'relation' ),
+                'arial'      => __( 'Helvetica, Arial font-stack', 'relation' ),
             ),
             'priority'    => '10',
         )
     ) );
 
+    $wp_customize->add_setting( 'relation_font_alignment', array(
+		'default'           => 'justify',
+		'type'              => 'theme_mod',
+		'sanitize_callback' => 'esc_textarea',
+		'capability'        => 'edit_theme_options',
+	) ); 
+    $wp_customize->add_control( 'relation_font_alignment', array(
+    
+        'label'       => __( 'Select Alignment of Text', 'relation' ),
+        'description' => __( "Aligns content text left, right or justify.", 'relation' ),
+        'section'     => 'relation_font_types',
+        'settings'    => 'relation_font_alignment',
+        'type'        => 'select',
+        'choices'     => array(
+                        'justify' => __( 'Justify equal width text', 'relation' ),
+                        'left'    => __( 'Standard Left alignment', 'relation' ),
+                        'center'  => __( 'Center text alignment', 'relation' ),
+                        'right'   => __( 'Right alignment ltr maybe', 'relation' ),
+                    ),
+        'priority'    => '12',
+    ) );
 
     $wp_customize->add_setting( 'relation_thumbnail_display', array(
 		'default'           => 'background_image',
@@ -95,6 +116,7 @@ function relation_register_theme_customizer_setup($wp_customize)
         'label'       => __( 'Thumbnail Position for Excerpts', 'relation' ),
         'description' => __( "Choose thumbnail layout. Will only show thumbnail if one exists.", 'relation' ),
         'section'     => 'relation_font_types',
+        'settings'    => 'relation_thumbnail_display',
         'type'        => 'select',
         'choices'     => array(
             'background_image' => __( 'Display as background image', 'relation' ),
