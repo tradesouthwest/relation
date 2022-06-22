@@ -18,17 +18,13 @@ Relation is distributed under the terms of the GNU GPL
 == Other Licenses ==
 
 == Notes ==
-* Requires WordPress 3.6 or higher and WordPress 4.9 or lower!
+* This theme is built exclusively for ClassicPress CMS but may be use for WordPress without any warranty.
 
-* All navigation to main top menu is parent recursive. If you have a menu with sub pages then the top link will not be clickable unless you turn off the option to use mobile nav in the Customizer. 
+* All navigation to main top menu is pure CSS with no javascript to enhance any functionality 
 
-* To set up social media links in the page footer: Appearance > Menus - then <Custom Links> to the left. Footer does not support depths of the child links below it. (No drop downs)
+* To set up social media links in the page sidemounted header: Appearance > Menus - then <Custom Links> to the left. Footer does not support depths of the child links below it. (No drop downs)
 
 == Change Log ==
-1.0.3
-- added comment form ui for pages
-- added attachment linked on pages
-
 1.0.2
 - added color selector to customizer
 

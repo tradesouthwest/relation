@@ -178,8 +178,21 @@ p {
     white-space: normal;
 }
 
+.single-article-header h2,
+.single-page-header h2{
+    margin-top: 0;
+}
+
 /* =Page attributes
 -------------------------------------------- */
+.single-article-header {
+    margin-top: -5px;
+}
+
+.single-page-header{
+    padding-left: 2em;
+}
+
 #copyFooter,
 .sidemount,
 .container-main,
@@ -252,74 +265,22 @@ p {
 }
 
 #Main {
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-top: 38px;
+    padding-left: 2em;
+    margin-top: 2em;
+    padding-top: 2.222em;
 }
 
-.blog .main article.post:first-child{
-    padding-top: 50px;
+#Main .post:first-child {
+    margin-top: 4.67em;
+}
+
+.single #Main{
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .blog #Main {
-    padding-top: 15px;
-}
-
-article.post,
-article.page{
-    padding-left:20px;
-    padding-right: 20px;
-}
-
-.single-article-header,
-.single-page-header{
-    width: 100%;
-    height: 5em;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.perma-hover-link {
-   
-    display: inline-block;
-    color: inherit;
-}
-
-.perma-hover-link i {
-    color: #038;
-    cursor: pointer;
-}
-
-.perma-hover-link em{
-    color: transparent;
-    position: relative;
-    left: 1.45em;
-    top: -1.25em;
-}
-.perma-hover-link em:hover{
-    cursor: text;
-    color: inherit
-}
-
-.perma-hover {
-    width: 100%;
-    height: 3em;
-    position: relative;
-    left: 0;
-    cursor: pointer;
-}
-
-.single-article-header h2{
-    color: inherit;
-    margin: 10px 0 0 0;
-}
-
-.page .post-title.h4 {
-    margin-top: 20px;
-}
-
-.inner_content{
-    line-height: 1.5758;
+    padding-top: .938em;
 }
 
 .dark .navbar-fixed {
@@ -344,6 +305,17 @@ article.page{
     border-bottom: 1px solid #ddd;
 }
 
+.page .post-title.h4 {
+    margin-top: 0;
+}
+
+.inner_content{
+    line-height: 1.5758;
+    margin-top: 2.2222em;
+    padding-right: 3em;
+    padding-left: 2em;
+}
+
 .content-woo{
     width: 98.8992%;
     margin: 0 auto;
@@ -356,13 +328,6 @@ article.page{
     border-bottom: thin dotted #ddd;
     vertical-align: bottom;
 }
-
-#lower-navigation{
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-top: 20px;
-}
-
 /*
  * Default WP Alignment Classes
  *****************************************************************************/
@@ -460,8 +425,6 @@ img[class*="-thumbnail"] {
 .linked-attachment-container{
     background: inherit;
 }
-
-.relation-featured.wp-post-image,
 .relation-featured_image,
 .attachment-relation-featured{
     text-align: center;
@@ -472,12 +435,6 @@ img[class*="-thumbnail"] {
     clear: both;
     display: block;
 }
-.relation-featured.wp-post-image{
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
 .background_image{
     position: relative;
     background-size: contain;
@@ -509,11 +466,6 @@ img[class*="-thumbnail"] {
 tr,
 img {
     page-break-inside: avoid;
-}
-
-button[type="submit"],
-input[type="submit"] {
-    cursor: pointer;
 }
 
 .search-field,
@@ -629,6 +581,30 @@ pre code {
     border-radius: 0;
 }
 
+.perma-hover-link {
+    position: relative;
+    color: transparent;
+    left: 0;
+    top: 0;
+}
+
+.perma-hover-link:hover {
+    color: #038;
+    cursor: text;
+}
+
+.perma-hover-link > em{
+    position: relative;
+    left:1.5em;
+    top: -1.12em;
+} 
+
+.perma-hover {
+    width: 100%;
+    cursor: pointer;
+    display: inline-block
+}
+
 .excrpt-more {
     margin-left: 8px;
 }
@@ -693,8 +669,8 @@ ul.list-inline {
     border-bottom: 1px solid #ddd;
     z-index: 999;
     width: calc( calc( .6 * 100% ) - 20px );
-    min-height: 38px;
-    background: rgba(255,255,255, .92);
+    min-height: 1px;
+    background: #ffffff;
     margin-top: 0;
     padding: 10px 2px;
     right: 0;
@@ -899,14 +875,16 @@ ul.list-inline {
 
 #lower-navigation a,
 .search-submit {
+    color: initial;
     text-decoration: none;
     cursor: pointer;
-    text-shadow: .25px .25px 0px #cfc0c0;
+    text-shadow: 1.5px 1.75px 7px #90979a;
 }
 
-.widget a {
-    color: #0262e2;
+#lower-navigation a:hover{
+    text-decoration: underline
 }
+
 .nav-previous,
 .nav-next,
 .postlink .btn-paging,
@@ -1031,14 +1009,12 @@ p.post-pagination,
 
 #comment{
     width: 66%;
-    border: thin solid #ddd;
 }
 
 .fieldset-commentform{
     border: thin dotted #e2e2e2;
     padding-left:10px;
     border-radius: 3px;
-    color: #a0a0a0;
 }
 .form-allowed-tags{
     font-size: small;

@@ -120,8 +120,8 @@ function relation_theme_customizer_css()
 {   
     
         $font = '';
-        $uria  = get_stylesheet_directory_uri() . '/deps/kmK_Zq85QVWbN1eW6lJV0A7d.woff2';
-        $urib  = get_stylesheet_directory_uri() . '/deps/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2';
+        $uria  = get_stylesheet_directory_uri() . '/dist/kmK_Zq85QVWbN1eW6lJV0A7d.woff2';
+        $urib  = get_stylesheet_directory_uri() . '/dist/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2';
         $arialstack = 'font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "DejaVu Sans Condensed",
         Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", Tahoma, Geneva, "Helvetica Neue", 
         Helvetica, Arial, sans-serif';
@@ -131,7 +131,8 @@ function relation_theme_customizer_css()
                     : get_theme_mod( 'relation_theme_color' );
         $ghs  = ( empty ( get_theme_mod( 'relation_excerpt_ghost' ) ) ) 
               ? "rgba(255,255,255, .426)" : get_theme_mod( 'relation_excerpt_ghost' );
-    
+        $txt  = (empty( get_theme_mod( 'relation_font_alignment' ) ) ) ? 'justify' 
+                    : get_theme_mod( 'relation_font_alignment' );
     /* use above set values into inline styles */
 
     if ( $fnt == 'arial' ) { 
@@ -139,7 +140,7 @@ function relation_theme_customizer_css()
         $font .= 
         "body, button, input, select, textarea{";
         $font .= $arialstack . '}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
-        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}.inner_content{text-align: ' . $txt . ';}
         .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit{
         background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
 
@@ -155,7 +156,7 @@ function relation_theme_customizer_css()
         }";
         $font .= 'body, button, input, select, textarea{';
         $font .= 'font-family: "B612 Mono"}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
-        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}.inner_content{text-align: ' . $txt . ';}
         .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit{
         background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
     } elseif ( $fnt == 'montserrat' ) {
@@ -170,7 +171,7 @@ function relation_theme_customizer_css()
         }";
         $font .= 'body, button, input, select, textarea{';
         $font .= 'font-family: "Montserrat";}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
-        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}.inner_content{text-align: ' . $txt . ';}
         .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit{
         background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>';
     } else {
@@ -179,7 +180,7 @@ function relation_theme_customizer_css()
         $font .= 
         "body, button, input, select, textarea{";
         $font .= $arialstack . '}.fa-comm-count:before,.fa-copy-link:before,.fa-tags-list:before,.fa-category-folder:before,.fa-calendar-day:before{
-        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}
+        color: ' . $clr . '}.excerpt-ghost{background: '. $ghs .'}.inner_content{text-align: ' . $txt . ';}
         .nav-previous, .nav-next, .postlink .btn-paging, .search-submit, .submit, #lower-navigation a, .search-submit{
         background-image: linear-gradient( '. $clr .', '. $clr .', '. $clr .' );}</style>'; 
     } 
