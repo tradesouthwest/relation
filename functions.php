@@ -35,8 +35,10 @@ add_action( 'relation_exerpt_render',     'relation_exerpt_render_thumbnail' );
 // #f11
 add_action( 'relation_footer_meta',       'relation_footer_meta_render' );
 // ------------------------- Filters -----------------------------
-// #f4
-add_filter( 'excerpt_more',    'relation_custom_excerpt_more' );
+// #f12
+add_action( 'admin_init',   'relation_theme_add_editor_styles' );
+// #f14
+add_filter( 'excerpt_more', 'relation_custom_excerpt_more' );
 
 
 /**
@@ -145,6 +147,17 @@ function relation_theme_scripts() {
     wp_enqueue_style( 'relation-style', get_stylesheet_uri(), [], time(), false );
     // Add Dashicons, used in the main stylesheet.
     wp_enqueue_style( 'dashicons' );
+}
+
+/**
+ * Registers an editor stylesheet for the theme.
+ *
+ * @since 1.0.2
+ * @id f12
+ */
+function relation_theme_add_editor_styles() {
+
+    add_editor_style( 'editor-style.css' );
 }
 
 /** 
@@ -312,7 +325,7 @@ function relation_sanitize_text( $input ) {
  * Only `get_the_title` would work if you want the actual title of the post.
  * @return HTML
  *
- * @id f4
+ * @id f14
  */
 
 function relation_custom_excerpt_more($link) {
