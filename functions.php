@@ -52,8 +52,7 @@ add_filter( 'excerpt_more', 'relation_custom_excerpt_more' );
 
 function relation_theme_setup() {
 /* a.
- * Switch default core markup for search form, comment form, and comments
- * to output valid HTML5.
+ * Switch default core markup for search form, comment form, and comments to output valid HTML5.
  */
 /* b.
  * Let WordPress manage the document title.
@@ -63,7 +62,8 @@ function relation_theme_setup() {
  * Enable support for Post Thumbnails on posts and pages.
  * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
  */
-    // a.
+/** @since 1.0.2 */
+if ( function_exists( 'is_classicpress' ) && version_compare( '2.0', $cp_version, '<' ) ) {
     add_theme_support( 'html5', array(
         'search-form',
         'comment-form',
@@ -71,7 +71,7 @@ function relation_theme_setup() {
         'gallery',
         'caption',
     ));
- 
+}
     // b.
     add_theme_support( 'title-tag' );
     add_theme_support( 'automatic-feed-links' ); // rss feederz
