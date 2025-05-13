@@ -21,7 +21,7 @@ if ( is_front_page() && is_home() || is_home() ) :
 				'comments title',
 				'relation'
 			) ),
-			number_format_i18n( esc_attr( $comments_number ) ),
+			wp_kses_post( number_format_i18n( esc_attr( $comments_number ) ) ),
 			'<span class="comm-title">' . esc_html( get_the_title() ) . '</span>'
 		);
 	}
@@ -43,7 +43,7 @@ else :
 				'comments title',
 				'relation'
 			) ),
-			number_format_i18n( esc_attr( $comments_number ) )
+			wp_kses_post( number_format_i18n( esc_attr( $comments_number ) ) )
 		);
 	}
 endif; ?>
