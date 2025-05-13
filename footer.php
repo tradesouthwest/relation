@@ -2,7 +2,7 @@
  /** 
   * Ends container-main & page-wrap from header file
   * @package Relation 
-  * @since 1.0.1
+  * @since 1.0.2
   */ 
 ?>
     
@@ -12,9 +12,8 @@
             <div id="footer-floats" class="footer-page">
                 <div class="maybe-copyright" style="display:block">
                     <p class="text-muted"><?php
-                    $year  = date_i18n(__( 'Y', 'relation' ));
-                    esc_html_e( 'Copyright ', 'relation' ); 
-                    echo esc_attr( ' ' . esc_attr( date('Y') ) . ' ' );
+                    esc_html_e( 'Copyright', 'relation' ); 
+                    echo esc_attr( ' ' . gmdate( esc_attr__( 'Y', 'relation' ) ) . ' / ' );
                     printf( esc_attr( bloginfo( 'name' ) ) ); ?></p>
                 </div>
         </footer>    

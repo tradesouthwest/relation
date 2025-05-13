@@ -186,6 +186,6 @@ function relation_theme_customizer_css()
     } 
 
         ob_start();
-        print( $font );
-        echo ob_get_clean(); 
+        print( $font );      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 } 

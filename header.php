@@ -31,7 +31,7 @@
                         <h1 class="site-title h1">
                         <a title="<?php bloginfo('description'); ?>" href="<?php echo esc_url(home_url('/')); ?>">
                         <?php bloginfo('name') ?></a></h1>
-                        <h4 class=""site-description"><?php bloginfo('description') ?></h4>
+                        <h4 class="site-description"><?php bloginfo('description') ?></h4>
                         <?php  
                         if( function_exists( 'relation_header_lead_render' ) ): ?>
 
@@ -66,8 +66,8 @@
             <div id="footer-floats" class="footer-page">
                 <div class="maybe-copyright" style="display:block">
                     <p class="text-muted">
-                    <span><?php esc_html_e( 'Copyright ', 'relation' ); 
-                    echo esc_attr( ' ' . esc_attr( date('Y') ) . ' ' );
+                    <span><?php esc_html_e( 'Copyright', 'relation' ); 
+                    echo esc_attr( ' ' . esc_attr( gmdate('Y') ) . ' | ' );
                     printf( esc_attr( bloginfo( 'name' ) ) ); ?></span></p>
                 </div>
         </footer>
