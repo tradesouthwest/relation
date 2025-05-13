@@ -9,10 +9,10 @@ if ( is_front_page() && is_home() || is_home() ) :
 		printf(
 			/* translators: %s: post title */
 			esc_html_x( '1 Response to &ldquo;%s&rdquo;', 'comments title', 'relation' ),
-			'<span>' . get_the_title() . '</span>'
+			'<span>' . esc_html( get_the_title() ) . '</span>'
 		);
 	} else { 
-		printf( // WPCS: XSS OK.
+		printf( // phpcs:ignore WordPress.Security.EscapeOutput.DeprecatedWhitelistCommentFound
 			/* translators: 1: number of comments, 2: post title */
 			esc_html( _nx(
 				'%1$s Response to &ldquo;%2$s&rdquo;',
@@ -34,7 +34,7 @@ else :
 			esc_html_e( '1 Response', 'relation' )
 		);
 	} else { 
-		printf( // WPCS: XSS OK.
+		printf( // phpcs:ignore WordPress.Security.EscapeOutput.DeprecatedWhitelistCommentFound
 			/* translators: 1: number of comments, 2: post title */
 			esc_html( _nx(
 				'%1$s Response',

@@ -188,11 +188,15 @@ p {
 .single-article-header {
     margin-top: -5px;
 }
-
+.attachment.single #Main{ 
+    margin-top: 4.222em;
+}
 .single-page-header{
     padding-left: 2em;
 }
-#content.hordes-row{top: 3em;}
+#content.hordes-row{
+    top: 3em;
+}
 #copyFooter,
 .sidemount,
 .container-main,

@@ -19,7 +19,7 @@ get_header(); ?>
                     <div class="perma-hover">
                     <span class="perma-hover-link">
                     <?php printf( '<i class="fa-copy-link" title="%s"></i><em>%s</em>',
-                                      __( 'hover aside to copy link', 'relation'),
+                                    esc_attr__( 'hover aside to copy link', 'relation' ),
                                     esc_html( esc_url( get_permalink() ) )
                     ); ?>
                     </span>
@@ -46,7 +46,7 @@ get_header(); ?>
                         <?php else : ?>
 
                         <a href ="<?php echo esc_url(wp_get_attachment_url($post->ID)) ?>"
-                           title="<?php echo esc_attr(get_the_title($post->ID), 1 ) ?>"
+                           title="<?php echo esc_attr(get_the_title($post->ID)) ?>"
                            rel  ="attachment"><?php printf( esc_url( basename($post->guid) ) ); ?></a>
 
                     <?php endif; ?>

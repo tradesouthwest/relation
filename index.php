@@ -37,11 +37,11 @@ get_header(); ?>
                         <?php // reclass set to background_image
                         if ( $reclass == 'background_image' ) : ?>
 
-                        <div class="<?php print( $reclass ); ?>" 
+                        <div class="<?php echo esc_attr( $reclass ); ?>" 
                              style="background-image: url(<?php echo esc_url($feat_url); ?>)">
                             <span class="excerpt-ghost">
                             
-                                <?php  the_excerpt(); ?>
+                                <?php the_excerpt(); ?>
                         
                             </span>
                         </div>
@@ -68,7 +68,7 @@ get_header(); ?>
                         <div class="no_thumbnail">
                             <span class="excerpt-nothumb">
                             
-                                <?php  the_excerpt(); ?>
+                                <?php the_excerpt(); ?>
                         
                             </span>
                         </div>
@@ -81,7 +81,7 @@ get_header(); ?>
                         <div class="no_thumbnail">
                             <span class="excerpt-nothumb">
                             
-                                <?php  the_excerpt(); ?>
+                                <?php the_excerpt(); ?>
                         
                             </span>
                         </div>

@@ -35,7 +35,7 @@
                         <?php  
                         if( function_exists( 'relation_header_lead_render' ) ): ?>
 
-                            <p class="descriptor-alt"><?php print( relation_header_lead_render() ); ?></p>
+                            <p class="descriptor-alt"><?php printf( '%s', esc_html( relation_header_lead_render() ) ); ?></p>
                         <?php 
                         endif; ?>
                         
@@ -65,10 +65,9 @@
         <footer id="copyFooter">
             <div id="footer-floats" class="footer-page">
                 <div class="maybe-copyright" style="display:block">
-                    <p class="text-muted"><?php 
-                    $year   = date_i18n(__( 'Y', 'relation' )); ?>
+                    <p class="text-muted">
                     <span><?php esc_html_e( 'Copyright ', 'relation' ); 
-                    echo esc_attr( ' ' . $year . ' ' );
+                    echo esc_attr( ' ' . esc_attr( date('Y') ) . ' ' );
                     printf( esc_attr( bloginfo( 'name' ) ) ); ?></span></p>
                 </div>
         </footer>

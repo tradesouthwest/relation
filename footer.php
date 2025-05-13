@@ -14,7 +14,7 @@
                     <p class="text-muted"><?php
                     $year  = date_i18n(__( 'Y', 'relation' ));
                     esc_html_e( 'Copyright ', 'relation' ); 
-                    echo esc_attr( ' ' . $year . ' ' );
+                    echo esc_attr( ' ' . esc_attr( date('Y') ) . ' ' );
                     printf( esc_attr( bloginfo( 'name' ) ) ); ?></p>
                 </div>
         </footer>    

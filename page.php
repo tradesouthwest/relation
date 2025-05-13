@@ -13,7 +13,7 @@
                     <div class="perma-hover">
                     <span class="perma-hover-link">
                     <?php printf( '<i class="fa-copy-link" title="%s"></i><em>%s</em>',
-                                      __( 'hover aside to copy link', 'relation'),
+                                    esc_attr__( 'hover aside to copy link', 'relation'),
                                     esc_html( esc_url( get_permalink() ) )
                     ); ?>
                     </span>
