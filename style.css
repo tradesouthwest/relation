@@ -1,15 +1,16 @@
 
 
 /**
-  Theme Name:  Relation
+  Theme Name:   Relation
   Description:  Relation is a blogging theme made for ClassicPress. Features include fast loading templates, color scheme in Customizer, add lead text to header and an additional menu where you add your social links into header space. Footer switches between sections acording to width of device viewing. Relation has an option to show comment count or not show. You can pick how to display a featured image: above or as background or even not show at all. Control thumbnail overlays in the Customizer. Relation theme uses Dashicons on frontend to save font imports and we use a classic font-stack as well as two font layers built into the theme so you do not have to ping any font CDN. Has attachment template for full page image display. Add custom header image or logo. Anchor link on every page makes it easy to copy page URI for convenient sharing. Fast and dependable theme for ClassicPress. Perfect for blogging or authoring news or company updates. 
   Author:       Larry Judd
   Author URI:   http://tradesouthwest.com/
-  Theme URI:    https://larryjudd.us/relation/theme/
+  Theme URI:    https://github.com/tradesouthwest/relation/
   Version:      1.0.2
   Text Domain:  relation
-  Tested Up To: 1.4.1
-  Requires PHP: 5.6
+  Tested Up To: 2.4.1
+  Requires PHP: 7.4
+  Requires CP:  1.4
   CMS required: wp_body_open WP action or function call not inserted
   Tags:         two-columns, translation-ready, footer-widgets, full-width-template, featured-images, blog, e-commerce, news, custom-menu, post-formats, custom-background, custom-logo, editor-style, custom-header, threaded-comments
   License:      GPL 3
